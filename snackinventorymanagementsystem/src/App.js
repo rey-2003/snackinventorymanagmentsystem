@@ -1,7 +1,10 @@
 import React from 'react';
+import LoginRegister from "./pages/LoginRegister";
 import Home from "./pages/Home";
 import Navbar from "./components/navbar";
-import Menu from "./pages/Menu";
+import Product from "./pages/Product";
+import Cart from "./pages/Cart";
+import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 
@@ -11,11 +14,13 @@ function App() {
             <Router>
               <Navbar />
               <Routes>
-               
-                <Route path="/" exact element={<Home />} />
-                <Route path="/menu" exact element={<Menu />} />
-                
+                <Route path="/" exact element={<LoginRegister/>} />
+                <Route path="/login-register" exact element={<LoginRegister/>} />
+                <Route path="/home" exact element={<Home />} />
+                <Route path="/product" exact element={<Product />} />
+                <Route path="/cart" exact element={<Cart />} />
               </Routes>
+              <Footer />
             </Router>
         </div>
     );

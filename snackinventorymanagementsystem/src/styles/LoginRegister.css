@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: rgb(105, 58, 58);
+  
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-form {
+  background-color: rgb(6, 121, 6); 
+  padding: 20px;
+  border-radius: 8px;
+  color: black;
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-style: italic;
+  font-size: small;
+}
+
+input {
+  width: 90%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-size: small;
+  border-radius: 10px;
+
+}
+
+button {
+  background-color: #1c0d0d;
+  color: #dac1c1; 
+  padding: 15px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: small;
+  font-style:italic;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+}
+
+button:hover {
+  background-color: grey;
+}
+
+h2 {
+  font-style: italic;
+}
+
+header {
+  font-family: 'Courier New', Courier, monospace;
+  color: gold;
+}
+ .error-dialog {
+  background-color: #ffdddd;
+  color: #8b0000;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #8b0000;
+  border-radius: 4px;
+}

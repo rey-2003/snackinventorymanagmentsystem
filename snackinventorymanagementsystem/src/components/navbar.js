@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import { FaAlignJustify } from "react-icons/fa";
+import { useCart } from '../pages/CartContext';
+import Cart from "../pages/Cart";
 import { FaShoppingCart } from "react-icons/fa";
+import { FaAlignJustify } from "react-icons/fa";
 import "../styles/Navbar.css";
 
 function Navbar() {
+
+  const { getCartCount } = useCart();
+  const [showCart, setShowCart] = useState(false);
+
+  const toggleCart = () => {
+    setShowCart(!showCart);
+  };
+
   const [openLinks, setOpenLinks] = useState(false);
 
   const toggleNavbar = () => {
@@ -22,9 +32,12 @@ function Navbar() {
           <Link to="/login-register"> Login|Register </Link>
           </div>
          </div>
+         <div> 
+         
          <div className="rightSide">
           <Link to="/cart">
-          <FaShoppingCart/>
+          <FaShoppingCart/>  <span onClick={toggleCart}>{getCartCount()}</span>
+          {showCart && <Cart/>}
           </Link>
           <Link to="/home"> Home </Link>
           <Link to="/product"> Product </Link>
@@ -34,8 +47,9 @@ function Navbar() {
             <FaAlignJustify/>
           </button>
          </div>
+         </div>
     </div>
   );
-}
+};
 
 export default Navbar; 

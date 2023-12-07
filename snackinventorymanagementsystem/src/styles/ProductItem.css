@@ -1,10 +1,7 @@
-button {
-   text-align: center;
-   justify-content: center;
-  }
+.outOfStock {
+  color: red; /* or any other color you prefer for out-of-stock items */
+}
 
-.label {
-   align-items: center;
-   justify-content: center;
-   text-align: center;
+.inStock {
+  color: black; /* or any other color you prefer for in-stock items */
 }

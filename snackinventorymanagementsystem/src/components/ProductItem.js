@@ -1,9 +1,21 @@
 import React from 'react'
+import { useCart } from '../pages/CartContext';
 import "../styles/ProductItem.css";
-import { Link } from "react-router-dom";
 
-function ProductItem({ image, name, flavor, size, price, flavorOptions=[], sizeOptions=[], onFlavorChange, onSizeChange,}) {
 
+function ProductItem({ image, name, flavor, size, price, stock, flavorOptions=[], sizeOptions=[], onOptionChange, onAddToCart}) {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({name: name, flavor: flavor, size: size, price: price,});
+    onAddToCart();
+    console.log('Product added to cart:', {
+    name: name,
+    flavor: flavor,
+    size: size,
+    price: price,
+  });
+  };
 
   return (
     <div className="productItem">
@@ -13,10 +25,10 @@ function ProductItem({ image, name, flavor, size, price, flavorOptions=[], sizeO
         <h1> {size} </h1>
         <label>
           <strong>Flavor:</strong>
-          <select value={flavor} onChange={(e) => onFlavorChange(e.target.value)}>
-            {flavorOptions.map((flavorOptions) => (
-              <option key={flavorOptions} value={flavorOptions}>
-                {flavorOptions}
+          <select value={flavor} onChange={(e) => onOptionChange('flavor', e.target.value)}>
+            {flavorOptions.map((flavorOption, index) => (
+              <option key={index} value={flavorOption}>
+                {flavorOption}
               </option>
             ))}
           </select>
@@ -24,18 +36,17 @@ function ProductItem({ image, name, flavor, size, price, flavorOptions=[], sizeO
         <br />
         <label>
           <strong>Size:</strong>
-        <select value={size} onChange={(e) => onSizeChange(e.target.value)}>
-          {sizeOptions.map((sizeOption) => (
-            <option key={sizeOption} value={sizeOption}>
+        <select value={size} onChange={(e) => onOptionChange('size', e.target.value)}>
+          {sizeOptions.map((sizeOption, index) => (
+            <option key={index} value={sizeOption}>
               {sizeOption}
             </option>
           ))}
         </select>
         </label>
-        <p> {price} </p>
-        <Link to="/cart">
-        <button>Add to Cart</button>
-        </Link>
+        <p> P{price} </p>
+         <label className={stock === 0 ? 'outOfStock' : 'inStock'}>Stocks: {stock}</label>
+        <button onClick={handleAddToCart} disabled= {stock ===0}>Add to Cart</button>
     </div>
   );
 }

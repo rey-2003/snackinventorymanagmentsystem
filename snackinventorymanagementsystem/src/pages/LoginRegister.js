@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../styles/LoginRegister.css';
 import axios from 'axios'; 
 
@@ -12,37 +12,60 @@ function Login ({ onLogin, onRegister, toggleForm }) {
    const [accountType, setAccountType] = useState('customer');
   const [isLogin, setIsLogin] = useState(true);
    const [error, setError] = useState('');
+   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+   const navigate = useNavigate();
 
   const handleLogin = () => {
-    const userData = { username, password };
-  axios.post('http://localhost:3001/login', userData)
+
+    if (!username || !password || !accountType) {
+    setError('Please fill up all the required information.');
+    return;
+  }
+  const userData = { username, password, accountType };
+  axios.post('http://localhost:8081/login', userData,{ withCredentials: true})
     .then(response => {
-      if(response.data) {
-      console.log(response.data.message);
-    } else {
-      console.error('Unexpected response format:', response);
-    }
-  })
+      if (response.data && response.data.success) {
+        console.log('Login successful!'); // Successful login message
+        // You can also perform additional actions here, such as setting user state
+        setError('');
+        onLogin();
+         // Assuming onLogin is a callback function passed as a prop
+          navigate('/Home');
+          console.log('Login successful!');
+      } else {
+        console.error('Login failed:', response.data ? response.data.error : 'Unexpected response format');
+        setError('Login failed');
+      }
+    })
     .catch(error => {
       console.error(error.response ? error.response.data.error : 'Network error');
+    
     });
 };
-
+  
   const handleRegister = () => {
-   const userData = { username, email, password, contactNumber, accountType };
-  axios.post('http://localhost:3001/register', userData)
+  // Check if any required field is empty
+  if (!username || !email || !password || !contactNumber) {
+    setError('Please fill up all the required information.');
+    return;
+  }
+
+  const userData = { username, email, password, contactNumber, accountType };
+
+  axios.post('http://localhost:8081/register', userData)
     .then(response => {
-      if (response.data) {
-      console.log(response.data.message);
-      setError('');
-      }else {
+      if (response.data && response.data.message) {
+        console.log(response.data.message);
+        setRegistrationSuccess(true);
+        setError('');
+        onRegister();
+      } else {
         console.error('Unexpected response format:', response);
         setError('Error: Unexpected response format');
       }
     })
     .catch(error => {
-     console.error(error.response ? error.response.data.error : 'Network error');
-      setError(`Error: ${error.response ? error.response.data.error : 'Network error'}`);
+      console.error(error.response ? error.response.data.error : 'Network error');
     });
 };
 
@@ -51,7 +74,6 @@ function Login ({ onLogin, onRegister, toggleForm }) {
       <header>SNACK INVENTORY MANAGEMENT SYSTEM</header>
       <div className="login-form">
         <h2>{isLogin?'Login':'Registration Form'}</h2>
-        <p>Please enter the required information below.</p>
         <label>Username:</label>
         <input type="text" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} />
         {!isLogin && (
@@ -90,10 +112,12 @@ function Login ({ onLogin, onRegister, toggleForm }) {
             </div>
           </div>
         {isLogin? (
-          <Link to="/Home">
         <button onClick={handleLogin}>Login</button>
-        </Link> ):(
+        ):(
         <button onClick={handleRegister}>Register</button>)}
+        {registrationSuccess && (
+          <div className="success-message">Registration successful!</div>
+        )}
         <p onClick={() => setIsLogin(!isLogin)} style={{ color: isLogin ? 'white' : 'white' }}> {isLogin? 'Don\'t have an account? Register': 'Already have an account? Login'}</p>
         <p>
           <Link to="/forgot-password">Forgot Password?</Link>

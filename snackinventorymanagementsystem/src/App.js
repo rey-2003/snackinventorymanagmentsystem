@@ -4,13 +4,16 @@ import Home from "./pages/Home";
 import Navbar from "./components/navbar";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
+import { CartProvider } from './pages/CartContext';
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 
 function App() {
     return (
+
         <div className="App">
+            <CartProvider>
             <Router>
               <Navbar />
               <Routes>
@@ -22,7 +25,9 @@ function App() {
               </Routes>
               <Footer />
             </Router>
+            </CartProvider>
         </div>
+      
     );
 }
 

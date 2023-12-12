@@ -16,80 +16,160 @@ export const ProductList = [
         sizeOptions: ["*Select*", "Small", "Medium", "Large"],
         flavorOptions: ["*Select*", "Cookies & Cream", "Red Velvet", "Dark Chocolate", "Taro", "Double Dutch", "Hazelnut", "Black Forest", 
         "Mango Cheesecake", "Cheesy Mango", "Hokkaido", "Okinawa", "Mocha", "Ube", "Wintermelon"],
-        price: 32,
-        stock: 100,
+        price: {
+      Small: 32,
+      Medium: 45,
+      Large: 60,
+    },
+        stock: {
+      Small: 10,
+      Medium: 15,
+      Large: 20,
+      },
     },
     {
         name: "FRIES",
         image: Fries,
         sizeOptions: ["*Select*", "Small", "Medium", "Large"],
         flavorOptions: ["*Select*", "Sour Cream", "Barbeque", "Cheese", "Plain Salty"],
-        price: 35,
-        stock: 100,
+        price:{
+      Small: 35,
+      Medium: 50,
+      Large: 65,
+    },
+        stock: {
+          Small: 10,
+      Medium: 15,
+      Large: 20,
+          },
     },
     {
         name: "POPCORN",
         image: Popcorn,
         sizeOptions: ["*Select*", "Small", "Medium", "Large"],
         flavorOptions: ["*Select*", "Caramelize", "Cheese", "Regular"],
-        price: 10,
-        stock: 100,
+        price: {
+      Small: 10,
+      Medium: 25,
+      Large: 40,
+    },
+        stock: {
+          Small: 10,
+      Medium: 15,
+      Large: 20,
+        },
     },
       {
         name: "SIOMAI",
         image: Siomai,
-        sizeOptions: ["*Select*", "STEAMED- 3pcs/P30", "FRIED- 3pcs/P35"],
+        sizeOptions: ["*Select*", "Small", "Medium", "Large"],
         flavorOptions: ["*Select*", "Pork", "Chicken", "Beef", "Japanese"],
-        price: 30, 
-        stock: 100,
+        price: {
+      Small: 30,
+      Medium: 35,
+      Large: 30,
+    },
+ 
+        stock: {
+         Small: 10,
+      Medium: 15,
+      Large: 20,
+        },
     },
       {
         name: "NGOYONG",
         image: Ngoyong,
-        sizeOptions: ["*Select*", "3pcs-P25"],
+        sizeOptions: ["*Select*", "Small", "Large"],
         flavorOptions: ["*Select*", "Vege", "Chicken", "BEEF"],
-        price: 9,
-        stock: 100,
+        price: {
+          Small: 9,
+          Large: 25,
+        },
+
+        stock: {
+         Small: 10,
+      Medium: 15,
+      Large: 20,
+        },
       },
       {
         name: "TEMPURA",
         image: Tempura,
-        sizeOptions: ["*Select*", "4pcs-P20", "9pcs-P40"],
+        sizeOptions: ["*Select*", "Small", "Medium", "Large"],
         flavorOptions: ["*Select*", "Sweet", "Chili", "Extra Hot Chili"],
-        price: 5,
-        stock: 100,
+        price: {
+          Small: 5,
+          Medium: 20,
+          Large: 40,
+        },
+        stock: {
+      Small: 10,
+      Medium: 15,
+      Large: 20,
+        },
       },
       {
         name: "MILKSHAKE",
         image: Milkshake,
         sizeOptions: ["*Select*", "Small", "Medium", "Large"],
         flavorOptions: ["*Select*", "Cookies & Cream", "Mango", "Orange", "Melontastic", "Mocha", "Buko Pandan", "Avocado", "Vanilla", "Strawberry", "Ube", "Chocodrops"],
-        price: 60,
-        stock: 100,
+        price:{
+      Small: 60,
+      Medium: 80,
+      Large: 110,
+    },
+
+        stock:{
+       Small: 10,
+      Medium: 15,
+      Large: 20,
+        },
     },
       {
         name: "SIOPAO",
         image: Siopao,
-        sizeOptions: ["*Select*"],
+        sizeOptions: ["*Select*", "Small"],
         flavorOptions: ["*Select*", "Pork", "Chicken", "Beef"],
-        price: 15,
-        stock: 100,
-    },
+        price: {
+          Small: 15
+        },
+        stock: {
+        Small: 10,
+      Medium: 15,
+      Large: 20,
+      },
+    },     
       {
         name: "FRUIT JUICE",
         image: FruitJuice,
-        sizeOptions: ["*Select*", "16oz"],
+        sizeOptions: ["*Select*", "Small", "Large"],
         flavorOptions: ["*Select*", "Calamansi Lemon", "Green Apple", "Blueberry", "Blue Lemonade", "Four Seasons"],
-        price: 35,
-        stock: 100,
+        price:{
+          Small: 15,
+          Large: 35,
     },
+        stock: {
+
+      Small: 10,
+      Medium: 15,
+        },
+      },
+    
       {
         name: "ICED COFFEE",
         image: IceCoffee,
-        sizeOptions: ["*Select*", "8oz", "16oz"],
+        sizeOptions: ["*Select*", "Small", "Medium", "Large"],
         flavorOptions: ["*Select*", "Coffee Original", "Coffee Choco", "Coffee Malunggay", "Black Forest", "Strawberry Latte"],
-        price: 30,
-        stock: 100,
+        price: {
+          Small: 15,
+          Medium: 30,
+          Large: 45,
+        },
+        stock: {
+      Small: 10,
+      Medium: 15,
+      Large: 20,
+      },
     },
 ];
 

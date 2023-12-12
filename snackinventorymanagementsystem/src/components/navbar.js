@@ -29,7 +29,7 @@ function Navbar() {
           <Link to="/home"> Home </Link>
           <Link to="/product"> Product </Link>
           <Link to="/view-payment"> View Payment </Link>
-          <Link to="/login-register"> Login|Register </Link>
+          <Link to="/login-register"> Orders </Link>
           </div>
          </div>
          <div> 
@@ -41,7 +41,7 @@ function Navbar() {
           </Link>
           <Link to="/home"> Home </Link>
           <Link to="/product"> Product </Link>
-          <Link to="/view-payment"> View Payment </Link>
+          <Link to="/view-payment"> Ordered Product </Link>
           <Link to="/login-register"> Login|Register </Link>
           <button onClick={toggleNavbar}>
             <FaAlignJustify/>

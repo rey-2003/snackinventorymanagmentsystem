@@ -1,55 +1,123 @@
+// Product.js
+
 import React, { useState } from 'react';
-import { ProductList } from "../assist/ProductList";
+import Navbar from "../components/navbar";
+import { ProductList as initialProductList } from "../assist/ProductList";
 import ProductItem from '../components/ProductItem';
+import UpdateProduct from './UpdateProduct';
 import { useCart } from '../pages/CartContext';
 import "../styles/Product.css";
+import Footer from "../components/Footer";
 
-function Product() { 
+function Product() {
   const { addToCart } = useCart();
-
+  const [productList, setProductList] = useState(initialProductList);
   const [selectedOptions, setSelectedOptions] = useState({
-     flavor: '',
+    flavor: '',
     size: '',
   });
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [selectedProductName, setSelectedProductName] = useState('');
 
-  const handleOptionChange = (optionType, value) => {
+  const handleOptionChange = (optionType, value, productItem) => {
     setSelectedOptions({
       ...selectedOptions,
       [optionType]: value,
     });
+
+    if (optionType === 'size') {
+      if (productItem && productItem.prices && productItem.prices[value]) {
+        const updatedProduct = {
+          ...productItem,
+          price: productItem.prices[value],
+        };
+
+        setProductList((prevList) =>
+          prevList.map((item) =>
+            item.name === productItem.name && item.size === value ? updatedProduct : item
+          )
+        );
+      } else {
+        console.error(`Price information not found for size: ${value}`);
+      }
+    }
   };
 
   const handleAddToCart = (product) => {
-
-    const updatedProduct = { ...product, stock: product.stock -1 };
     addToCart({
-       name: updatedProduct.name,
-       flavor: selectedOptions.flavor,
-       size: selectedOptions.size,
-       price: updatedProduct.price,
+      name: product.name,
+      flavor: selectedOptions.flavor,
+      size: selectedOptions.size,
+      price: product.price,
+      updateStockCallback: () => updateStockCallback(product, -1),
     });
   };
-  
+
+  const updateStockCallback = (product, quantity) => {
+    console.log('Updating stock:', product, quantity);
+    const updatedProductList = productList.map((item) =>
+      item.name === product.name && item.size === selectedOptions.size
+        ? { ...item, stock: item.stock + quantity }
+        : item
+    );
+
+    setProductList(updatedProductList);
+  };
+
+  const handleUpdateProduct = (productName, newPrices) => {
+    const updatedProductList = productList.map((product) =>
+      product.name === productName ? { ...product, price: newPrices } : product
+    );
+    setProductList(updatedProductList);
+    setShowUpdateModal(false);
+  };
+
   return (
     <div className="product">
+      <Navbar />
       <h1 className="productTitle">Our Snacks Menu</h1>
       <div className="productList">
-        {ProductList.map((productItem, key) => (
+        {productList.map((productItem, key) => (
           <ProductItem
-          key={key}
-          image={productItem.image} 
-          name={productItem.name} 
-          flavor={productItem.flavor}
-          size={productItem.size}
-          price={productItem.price}
-          stock={productItem.stock}
-          flavorOptions={productItem.flavorOptions} // Pass flavorOptions to ProductItem
-              sizeOptions={productItem.sizeOptions} // Pass sizeOptions to ProductItem
-              onOptionChange={(type, value) => handleOptionChange(type, value)} // Pass flavor change handler to ProductItem
-               onAddToCart={() => handleAddToCart(productItem)}
+            key={key}
+            image={productItem.image}
+            name={productItem.name}
+            flavor={productItem.flavor}
+            size={productItem.size}
+            price={productItem.price}
+            flavorOptions={productItem.flavorOptions}
+            sizeOptions={productItem.sizeOptions}
+            stock={productItem.stock[selectedOptions.size]}
+            onOptionChange={(type, value) => handleOptionChange(type, value, productItem)}
+            onAddToCart={() => handleAddToCart(productItem)}
+            onStockUpdate={(quantity) => updateStockCallback(productItem, quantity)}
           />
-      ))}
+        ))}
       </div>
+      <div>
+        <label>
+          Select Product to Update:
+          <select
+            value={selectedProductName}
+            onChange={(e) => setSelectedProductName(e.target.value)}
+          >
+            <option value="">Select Product</option>
+            {productList.map((product) => (
+              <option key={product.name} value={product.name}>
+                {product.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <button onClick={() => setShowUpdateModal(true)}>Update Product</button>
+      {showUpdateModal && (
+        <UpdateProduct
+          product={productList.find((product) => product.name === selectedProductName)}
+          onUpdate={handleUpdateProduct}
+        />
+      )}
+      <Footer />
     </div>
   );
 }

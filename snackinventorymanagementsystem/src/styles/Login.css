@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: rgb(105, 58, 58);
+  
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.logo {
+  width: 600px;
+  height: auto;
+  margin-bottom: 0px;
+}
+
+.login-form {
+  background-color: rgb(6, 121, 6); 
+  padding: 20px;
+  margin: 0px;
+  border-radius: 8px;
+  color: black;
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-style: italic;
+  font-size: small;
+}
+
+input {
+  width: 90%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-size: small;
+  border-radius: 10px;
+
+}
+
+.login-form button {
+  background-color: #1c0d0d;
+  color: #dac1c1; 
+  padding: 15px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: small;
+  font-style:italic;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width:60%;
+  
+}
+
+button:hover {
+  background-color: grey;
+}
+
+h2 {
+  font-style: italic;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #0a0202;
+}
+
+header {
+  font-family: 'Courier New', Courier, monospace;
+  color: gold;
+}
+ .error-dialog {
+  background-color: #e4caca;
+  color: #1f1111;
+  padding: 10px;
+  margin-top: 20px;
+  border: 1px solid #0a0202;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: xx-small;
+}

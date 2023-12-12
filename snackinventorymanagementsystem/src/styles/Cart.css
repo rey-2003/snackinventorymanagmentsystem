@@ -3,22 +3,74 @@
     flex-direction: column;
     align-items: center;
     padding: 2px;
+    
 }
 
-h2 {
+.addcart h2 {
     text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: darkkhaki;
 }
 
 .productBox {
-    border: 1px solid #ccc;
+    border: 1px solid #31c604;
     padding: 10px;
-    margin-top: 1px;
-    border-radius: 10px
+    margin-top: 2px;
+    border-radius: 40px;
+    text-align: justify;
 
 }
 
-.productBox p span.price {
-    color: lawngreen;
+.productBox h4 span.price {
+    color: rgb(255, 255, 255);
 }   
+
+.productBox p {
+    color:rgb(149, 146, 1);
+}
+
+h3 span.price {
+    color: chartreuse;
+}
+
+.productBox label {
+    color: cyan;
+    font-size: medium;
+    width: 20%;
+    font-family: monospace;
+}
+
+button {
+    border-radius: 50px;
+    font-size: smaller;
+     margin: 2px;
+     width: 15%;
+     background-color: black;
+     color:aqua;
+     height: 40px;
+}
+
+button:hover {
+       color:cyan;
+     }
+    
+
+p {
+    margin: 10px;
+}
+
+h3 {
+
+    text-align: center;
+}
+
+.productBox button {
+    width: 10%;
+
+}
+
+.div label button {
+    width: 20%;
+}
+
 

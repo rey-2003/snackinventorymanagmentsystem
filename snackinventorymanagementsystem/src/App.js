@@ -1,12 +1,11 @@
 import React from 'react';
-import LoginRegister from "./pages/LoginRegister";
+import { CartProvider } from './pages/CartContext';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Home from "./pages/Home";
-import Navbar from "./components/navbar";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
-import { CartProvider } from './pages/CartContext';
-import Footer from "./components/Footer";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 
 function App() {
@@ -15,15 +14,13 @@ function App() {
         <div className="App">
             <CartProvider>
             <Router>
-              <Navbar />
               <Routes>
-                <Route path="/" exact element={<LoginRegister/>} />
-                <Route path="/login-register" exact element={<LoginRegister/>} />
+                <Route path="/" exact element={<Login/>} />
+                <Route path="/register" exact element={<Register/>} />
                 <Route path="/home" exact element={<Home />} />
                 <Route path="/product" exact element={<Product />} />
                 <Route path="/cart" exact element={<Cart />} />
               </Routes>
-              <Footer />
             </Router>
             </CartProvider>
         </div>

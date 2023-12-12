@@ -46,7 +46,7 @@ app.post('/register', (req, res) => {
   
   // Perform your registration logic here using SQL queries
   const sql = 'INSERT INTO register (username, email, password, contactNumber, accountType) VALUES (?, ?, ?, ?, ?)';
-  db.query(sql, [username, email, password, contactNumber, accountType], (err, result) => {
+  db.query(sql, [username, email, hashedPassword, contactNumber, accountType], (err, result) => {
     if (err) {
       console.error('Registration failed:', err.stack);
       res.status(500).json({ error: 'Registration failed' });
@@ -57,14 +57,14 @@ app.post('/register', (req, res) => {
 });
 });
 // Handle user login
-app.post('/login', (req, res) => {
+app.post('/', (req, res) => {
   const { username, password, accountType } = req.body;
 
    console.log('Received login request:', { username, password, accountType });
 
   // Perform login logic using a MySQL query
-  const query = 'SELECT * FROM login WHERE username = ? AND password = ? AND accountType = ?';
-  db.query(query, [username, password, accountType], (err, results) => {
+  const query = 'SELECT * FROM register WHERE username = ? AND accountType = ?';
+  db.query(query, [username, accountType], (err, results) => {
     if (err) {
       res.status(500).json({ error: 'Internal Server Error' });
     } else {

@@ -1,5 +1,3 @@
-// Product.js
-
 import React, { useState } from 'react';
 import Navbar from "../components/navbar";
 import { ProductList as initialProductList } from "../assist/ProductList";
@@ -50,6 +48,12 @@ function Product() {
       size: selectedOptions.size,
       price: product.price,
       updateStockCallback: () => updateStockCallback(product, -1),
+    });
+
+    setSelectedOptions({
+      flavor: '',
+     size: '',
+     price: '',
     });
   };
 

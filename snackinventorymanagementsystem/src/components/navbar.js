@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useCart } from '../pages/CartContext';
 import Cart from "../pages/Cart";
 import { FaShoppingCart } from "react-icons/fa";
-import { FaAlignJustify } from "react-icons/fa";
 import "../styles/Navbar.css";
 
 function Navbar() {
@@ -15,22 +14,10 @@ function Navbar() {
   const toggleCart = () => {
     setShowCart(!showCart);
   };
-
-  const [openLinks, setOpenLinks] = useState(false);
-
-  const toggleNavbar = () => {
-    setOpenLinks(!openLinks);
-  };
   return (
     <div className="navbar">
-        <div className="leftSide" id={openLinks ? "open" : "close"}>
+        <div className="leftSide">
           <img src={Logo} alt="logo"/>
-          <div className="hiddenLinks">
-          <Link to="/home"> Home </Link>
-          <Link to="/product"> Product </Link>
-          <Link to="/view-payment"> View Payment </Link>
-          <Link to="/login-register"> Orders </Link>
-          </div>
          </div>
          <div> 
          
@@ -41,11 +28,9 @@ function Navbar() {
           </Link>
           <Link to="/home"> Home </Link>
           <Link to="/product"> Product </Link>
-          <Link to="/view-payment"> Ordered Product </Link>
-          <Link to="/login-register"> Login|Register </Link>
-          <button onClick={toggleNavbar}>
-            <FaAlignJustify/>
-          </button>
+          <Link to="/orders"> Orders</Link>
+          <Link to="/total-sales"> Total Sales </Link>
+          <Link to="/inventory"> Inventory </Link>
          </div>
          </div>
     </div>

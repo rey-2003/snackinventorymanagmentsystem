@@ -1,5 +1,3 @@
-// ProductItem.js
-
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../pages/CartContext';
 import "../styles/ProductItem.css";
@@ -62,8 +60,8 @@ function ProductItem({ image, name, flavor, size, price, stock, flavorOptions = 
       </label>
       <p> P{selectedPrice} </p>
       <p>Stocks: {stock}</p>
-      <button onClick={handleAddToCart} disabled={stock <= 0}>
-        {stock > 0 ? 'Add to Cart' : 'Out of Stock'}
+      <button onClick={handleAddToCart}>
+        Add to Cart
       </button>
     </div>
   );

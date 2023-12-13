@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios'; 
 import Logo from "../assets/logo.png";
 import '../styles/Register.css';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
-function Register({ onRegister }) {
+function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,11 +17,24 @@ function Register({ onRegister }) {
 
    const navigate = useNavigate();
 
+   const isValidEmail = (email) => {
+  // Regular expression for basic email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
   const handleRegister = () => {
+
+
     if (!username || !email || !password || !contactNumber) {
       setError('Please fill up all the required information.');
       return;
     }
+
+       if (!isValidEmail(email)) {
+    setError('Please enter a valid email address.');
+    return;
+  }
 
     const userData = { username, email, password, contactNumber, accountType };
 
@@ -30,7 +44,6 @@ function Register({ onRegister }) {
           console.log(response.data.message);
           setRegistrationSuccess(true);
           setError('');
-          onRegister();
 
           navigate('/');
         } else {
@@ -82,8 +95,10 @@ function Register({ onRegister }) {
         </div>
         <button onClick={handleRegister}>Register</button>
         {registrationSuccess && (
+          
           <div className="success-message">Registration successful!</div>
         )}
+        <p>Already have account?<Link to="/">Login</Link></p>
         {error && <div className="error-dialog">{error}</div>}
       </div>
     </div>

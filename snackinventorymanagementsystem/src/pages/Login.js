@@ -4,7 +4,7 @@ import '../styles/Login.css';
 import axios from 'axios'; 
 import Logo from "../assets/logo.png";
 
-function Login({ onLogin }) {
+function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [accountType, setAccountType] = useState('customer');
@@ -19,7 +19,7 @@ function Login({ onLogin }) {
     
     const userData = { username, password, accountType };
 
-    axios.post('http://localhost:8081/', userData, { withCredentials: true })
+    axios.post('http://localhost:8081/login', userData, { withCredentials: true })
       .then(response => {
         console.log('Login response:', response.data);
         
@@ -27,9 +27,8 @@ function Login({ onLogin }) {
           console.log('Login successful!');
           const { data } = response.data;
 
-          if (data.setUsername === username && data.accountType === accountType) {
+          if (data.username === username && data.accountType === accountType) {
           setError('');
-          onLogin();
           navigate('/Home');
         } else { 
           setError('Invalid username or account type');
@@ -37,8 +36,12 @@ function Login({ onLogin }) {
         }
       }else {
           console.error('Login failed:', response.data ? response.data.error : 'Unexpected response format');
-          setError('Invalid username, account type, or password');
+           if (response.data && response.data.error === 'Invalid password') {
+          setError('Incorrect password');
+        } else {
+          setError('Invalid username or password');
         }
+      }
       })
       .catch(error => {
         console.error(error.response ? error.response.data.error : 'Network error');
@@ -79,9 +82,6 @@ function Login({ onLogin }) {
           </div>
         </div>
         <button onClick={handleLogin}>Login</button>
-        <p>
-          <Link to="/forgot-password">Forgot Password?</Link>
-        </p>
         <p>Don't have an account? <Link to="/register">Create Account</Link></p>
         {error && <div className="error-dialog">{error}</div>}
       </div>

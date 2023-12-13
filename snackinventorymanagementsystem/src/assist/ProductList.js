@@ -38,9 +38,9 @@ export const ProductList = [
       Large: 65,
     },
         stock: {
-          Small: 10,
-      Medium: 15,
-      Large: 20,
+          Small: 30,
+      Medium: 10,
+      Large: 25,
           },
     },
     {
@@ -54,9 +54,9 @@ export const ProductList = [
       Large: 40,
     },
         stock: {
-          Small: 10,
-      Medium: 15,
-      Large: 20,
+          Small: 40,
+      Medium: 5,
+      Large: 10,
         },
     },
       {
@@ -65,15 +65,15 @@ export const ProductList = [
         sizeOptions: ["*Select*", "Small", "Medium", "Large"],
         flavorOptions: ["*Select*", "Pork", "Chicken", "Beef", "Japanese"],
         price: {
-      Small: 30,
-      Medium: 35,
-      Large: 30,
+      Small: 20,
+      Medium: 30,
+      Large: 10,
     },
  
         stock: {
-         Small: 10,
-      Medium: 15,
-      Large: 20,
+         Small: 15,
+      Medium: 25,
+      Large: 15,
         },
     },
       {
@@ -87,9 +87,9 @@ export const ProductList = [
         },
 
         stock: {
-         Small: 10,
-      Medium: 15,
-      Large: 20,
+         Small: 12,
+      Medium: 18,
+      Large: 12,
         },
       },
       {
@@ -103,9 +103,9 @@ export const ProductList = [
           Large: 40,
         },
         stock: {
-      Small: 10,
-      Medium: 15,
-      Large: 20,
+      Small: 40,
+      Medium: 53,
+      Large: 30,
         },
       },
       {
@@ -120,9 +120,9 @@ export const ProductList = [
     },
 
         stock:{
-       Small: 10,
-      Medium: 15,
-      Large: 20,
+       Small: 17,
+      Medium: 29,
+      Large: 10,
         },
     },
       {
@@ -135,8 +135,6 @@ export const ProductList = [
         },
         stock: {
         Small: 10,
-      Medium: 15,
-      Large: 20,
       },
     },     
       {
@@ -146,7 +144,7 @@ export const ProductList = [
         flavorOptions: ["*Select*", "Calamansi Lemon", "Green Apple", "Blueberry", "Blue Lemonade", "Four Seasons"],
         price:{
           Small: 15,
-          Large: 35,
+          Medium: 35,
     },
         stock: {
 
@@ -166,10 +164,10 @@ export const ProductList = [
           Large: 45,
         },
         stock: {
-      Small: 10,
-      Medium: 15,
-      Large: 20,
-      },
+      Small: 18,
+      Medium: 11,
+      Large: 14,
+          },
     },
 ];
 

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../pages/CartContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
+import Orders from '../pages/Orders';
 import '../styles/Cart.css';
 
 function Cart() {
   const { cart, setCart } = useCart();
   const [quantities, setQuantities] = useState(cart.map(() => 1));
+  const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log('Updated Quantities:', quantities);
@@ -33,8 +36,31 @@ function Cart() {
     updatedQuantities.splice(index, 1);
     setQuantities(updatedQuantities);
 
-
   };
+
+  const handlePlaceOrder = () => {
+    // Create orders based on the current cart state
+    const newOrders = cart.map((item, index) => ({
+      name: item.name,
+      flavor: item.flavor,
+      size: item.size,
+      quantity: quantities[index],
+      totalAmount: (item.price[item.size] || 0) * quantities[index],
+    }));
+
+    // Update the orders state
+    console.log('Setting orders state:', newOrders);
+    setOrders(newOrders);
+
+
+    // Clear the cart after placing the order
+    setCart([]);
+    setQuantities([]);
+
+    console.log('Navigating to orders page...');
+    navigate('/orders', { state: { orders: newOrders } });
+  };
+
    const totalAmountSum = cart.reduce(
     (total, item, index) => total + (item.price[item.size] ||0) * quantities[index],
     0
@@ -62,6 +88,14 @@ function Cart() {
              <button onClick={() => handleDeleteProduct(index)}>Delete Product</button>
           </div>
         ))}
+        <div className='placeOrder'>
+         {cart.length > 0 && (
+        <>
+         <button onClick={handlePlaceOrder}>Place Order</button>
+
+     </>
+       )}
+      </div>
       </div>
    <h3>Total Payment: <span className="price">{totalAmountSum}</span></h3>
       <Link to="/product">
@@ -69,6 +103,7 @@ function Cart() {
           <FaArrowLeft /> Back to Order Product
         </button>
       </Link>
+      {orders.length > 0 && <Orders orders={orders} />}
     </div>
   );
 }

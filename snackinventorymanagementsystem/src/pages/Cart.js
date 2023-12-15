@@ -5,10 +5,11 @@ import { FaArrowLeft } from 'react-icons/fa';
 import Orders from '../pages/Orders';
 import '../styles/Cart.css';
 
+
 function Cart() {
   const { cart, setCart } = useCart();
   const [quantities, setQuantities] = useState(cart.map(() => 1));
-  const [orders, setOrders] = useState([]);
+  const [orders] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,8 +39,8 @@ function Cart() {
 
   };
 
-  const handlePlaceOrder = () => {
-    // Create orders based on the current cart state
+ const handlePlaceOrder = () => {
+  console.log('Placing order:', cart);
     const newOrders = cart.map((item, index) => ({
       name: item.name,
       flavor: item.flavor,
@@ -48,10 +49,22 @@ function Cart() {
       totalAmount: (item.price[item.size] || 0) * quantities[index],
     }));
 
-    // Update the orders state
-    console.log('Setting orders state:', newOrders);
-    setOrders(newOrders);
-
+    fetch('http://localhost:8081/placeOrder', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ orders: newOrders }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data); // Handle the response from the server as needed
+        // Additional logic if needed after placing the order
+      })
+      .catch((error) => {
+        console.error('Error placing order:', error);
+        // Handle error if the order placement fails
+      });
 
     // Clear the cart after placing the order
     setCart([]);

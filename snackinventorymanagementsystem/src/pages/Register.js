@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios'; 
 import Logo from "../assets/logo.png";
 import '../styles/Register.css';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -98,7 +97,7 @@ function Register() {
           
           <div className="success-message">Registration successful!</div>
         )}
-        <p>Already have account?<Link to="/">Login</Link></p>
+        <p>Already have account?</p>
         {error && <div className="error-dialog">{error}</div>}
       </div>
     </div>

@@ -15,7 +15,7 @@ app.use(cors({
 app.use(express.json());
 app.get('/', (re,res)=> {
   return res.json("Backend Side");
-})
+});
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = mysql.createConnection({
@@ -120,8 +120,37 @@ app.post('/login', (req, res) => {
   });
 });
 
+app.post('/placeOrder', (req, res) => {
+  console.log('Received placeOrder request:', req.body);
+  try {
+  const { orders } = req.body;
+
+  // Perform your order placement logic here using SQL queries
+  const placeOrderQuery = 'INSERT INTO orders (name, flavor, size, quantity, totalAmount) VALUES (?, ?, ?, ?, ?)';
+  
+  orders.forEach((order) => {
+    const { name, flavor, size, quantity, totalAmount } = order;
+    
+    db.query(placeOrderQuery, [name, flavor, size, quantity, totalAmount], (orderError, result) => {
+      if (orderError) {
+        console.error('Order placement failed:', orderError.stack);
+        res.status(500).json({ error: 'Order placement failed' });
+        return;
+      }
+    });
+  });
+
+  res.json({ success: true, message: 'Order placed successfully' });
+  } catch (error) {
+    console.error('Error processing placeOrder request:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+
+});
+
 const PORT = 8081;
 
 app.listen(8081, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
+
 });

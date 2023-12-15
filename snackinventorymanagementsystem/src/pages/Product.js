@@ -35,9 +35,7 @@ function Product() {
             item.name === productItem.name && item.size === value ? updatedProduct : item
           )
         );
-      } else {
-        console.error(`Price information not found for size: ${value}`);
-      }
+      } 
     }
   };
 
@@ -57,16 +55,14 @@ function Product() {
     });
   };
 
-  const updateStockCallback = (product, quantity) => {
-    console.log('Updating stock:', product, quantity);
-    const updatedProductList = productList.map((item) =>
-      item.name === product.name && item.size === selectedOptions.size
-        ? { ...item, stock: item.stock + quantity }
-        : item
-    );
+  const updateStockCallback = (product, updatedStock) => {
+  console.log('Updating stock:', product, updatedStock);
+  const updatedProductList = productList.map((item) =>
+    item.name === product.name ? { ...item, stock: { ...item.stock, ...updatedStock } } : item
+  );
 
-    setProductList(updatedProductList);
-  };
+  setProductList(updatedProductList);
+};
 
   const handleUpdateProduct = (productName, newPrices) => {
     const updatedProductList = productList.map((product) =>
@@ -94,7 +90,7 @@ function Product() {
             stock={productItem.stock[selectedOptions.size]}
             onOptionChange={(type, value) => handleOptionChange(type, value, productItem)}
             onAddToCart={() => handleAddToCart(productItem)}
-            onStockUpdate={(quantity) => updateStockCallback(productItem, quantity)}
+            onStockUpdate={(updatedStock) => updateStockCallback(productItem, updatedStock)}
           />
         ))}
       </div>
@@ -122,6 +118,7 @@ function Product() {
         />
       )}
       <Footer />
+      
     </div>
   );
 }

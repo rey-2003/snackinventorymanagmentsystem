@@ -16,8 +16,8 @@ function ProductItem({ image, name, flavor, size, price, stock, flavorOptions = 
     onStockUpdate(-1);
     console.log('Product added to cart:', {
       name,
-      flavor,
-      size,
+      flavor: flavor,
+      size: size,
       price: selectedPrice,
     });
     console.log('onStockUpdate prop:', onStockUpdate);
